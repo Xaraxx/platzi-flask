@@ -21,4 +21,4 @@ def hello():
          'things_to_do': things_to_do
     }
     
-    return render_template('hello.html', context=context)
+    return render_template('hello.html', **context)

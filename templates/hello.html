@@ -6,8 +6,8 @@
     <title>Flask App</title>
 </head>
 <body>
-    {% if context.user_ip %}
-        <h1>Hello world!, your Ip is {{ context.user_ip }}</h1>
+    {% if user_ip %}
+        <h1>Hello world!, your Ip is {{ user_ip }}</h1>
     {% else %}
         <a href="{{ url_for('index') }}"> Go to the begin</a>
     {% endif %}
