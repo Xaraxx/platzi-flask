@@ -2,7 +2,17 @@ from flask import Flask, request, make_response, redirect, render_template
 
 app = Flask(__name__)
 
-things_to_do = ['TODO 1', 'TODO 2', 'TODO 3']
+things_to_do = ['Buy coffee', 'Send requirenment', 'Deliver a video']
+
+@app.errorhandler(500)
+def internal_server(error):
+    return render_template('500.html', error=error)
+
+
+@app.errorhandler(404)
+def not_found(error):
+    return render_template('404.html', error=error)
+
 
 @app.route('/')
 def index():

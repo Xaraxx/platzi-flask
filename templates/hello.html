@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
-    {% block title %}
-        {{ super() }} Welcome
-    {% endblock %}
+{% import 'macros.html' as macros %}
 
+{% block title %}
+    {{ super() }} 
+    Welcome
+{% endblock %}
+
+{% block content %}
     {% if user_ip %}
         <h1>Hello world!, your Ip is {{ user_ip }}</h1>
     {% else %}
@@ -10,8 +14,8 @@
     {% endif %}
     <ul>
         {% for todo in things_to_do %}
-            <li> to do</li>
+            {{ macros.render_todo(todo) }}
         {% endfor %}
     </ul>
-
+{% endblock %}
     
