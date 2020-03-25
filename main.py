@@ -20,6 +20,10 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     submit   = SubmitField('Submit')
 
+@app.cli.command()
+def test():
+    tests = unittest.TestLoader().discover('tests')
+    unittest.TextTestRunner().run(tests)
 
 @app.errorhandler(500)
 def internal_server(error):
