@@ -1,4 +1,4 @@
-from flask import Flask, request, make_response, redirect, render_template
+from flask import Flask, request, make_response, redirect, render_template, session
 
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
@@ -17,6 +17,7 @@ class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit   = SubmitField('Submit')
+
 
 @app.errorhandler(500)
 def internal_server(error):
