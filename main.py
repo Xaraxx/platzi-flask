@@ -65,6 +65,5 @@ def hello():
 
         return redirect(url_for('index'))
 
-
     return render_template('hello.html', **context)
 
