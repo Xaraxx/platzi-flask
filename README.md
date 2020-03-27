@@ -44,3 +44,5 @@ Change the debug mode.
 
 `echo $FLASK_APP`
 
+`gcloud auth login`
+
