@@ -11,4 +11,4 @@ def get_users():
     return db.collection('users').get()
 
 def get_things_to_do(user_id):
-    return db.collection('users').document(user_id).collection('things_to_do').get
+    return db.collection('users').document(user_id).collection('things_to_do').get()

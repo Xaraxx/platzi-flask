@@ -6,13 +6,9 @@ from flask_bootstrap import Bootstrap
 
 from app import create_app
 from app.forms import LoginForm
-from app.firestore_service import get_users
+from app.firestore_service import get_users, get_things_to_do
 
 app = create_app()
-
-
-things_to_do = ['Buy coffee', 'Send requirenment', 'Deliver a video']
-
 
 @app.cli.command()
 def test():
@@ -45,7 +41,7 @@ def hello():
     username = session.get('username')
     context = {
          'user_ip': user_ip, 
-         'things_to_do': things_to_do,
+         'things_to_do': get_things_to_do(user_id=username),
          'username': username
     }
     
