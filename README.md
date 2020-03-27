@@ -46,3 +46,6 @@ Change the debug mode.
 
 `gcloud auth login`
 
+This authentication is for comunicate our local server with google data base.
+
+`gcloud auth application-default login`

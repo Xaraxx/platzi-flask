@@ -6,6 +6,7 @@ from flask_bootstrap import Bootstrap
 
 from app import create_app
 from app.forms import LoginForm
+from app.firestore_service import get_users
 
 app = create_app()
 
@@ -41,22 +42,20 @@ def index():
 @app.route('/hello/', methods=['GET'])
 def hello():
     user_ip = session.get('user_ip')
-    # login_form = LoginForm()
     username = session.get('username')
     context = {
          'user_ip': user_ip, 
          'things_to_do': things_to_do,
-        #  'login_form': login_form,
          'username': username
     }
     
-    # if login_form.validate_on_submit():
-    #     username = login_form.username.data
-    #     session['username'] = username
+    users = get_users()
 
-    #     flash('Username succesful registered!')
-
-    #     return redirect(url_for('index'))
+    for user in users:
+        print(user.id)
+        print(user.to_dict()['password'])
 
     return render_template('hello.html', **context)
+
+
 
