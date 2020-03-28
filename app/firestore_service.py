@@ -2,6 +2,9 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 
+
+
+
 credential = credentials.ApplicationDefault()
 default_app = firebase_admin.initialize_app()
 
@@ -15,3 +18,8 @@ def get_user(user_id):
 
 def get_things_to_do(user_id):
     return db.collection('users').document(user_id).collection('things_to_do').get()
+
+
+def create_new_user(user_data):
+    user_ref = db.collection('users').document(user_data.username)
+    user_ref.set({'password': user_data.password})
