@@ -6,7 +6,7 @@ from flask_bootstrap import Bootstrap
 from flask_login import login_required, current_user
 
 from app import create_app
-from app.forms import LoginForm
+from app.forms import ThingsToDoForm
 from app.firestore_service import get_users, get_things_to_do
 
 app = create_app()
@@ -41,10 +41,12 @@ def index():
 def hello():
     user_ip = session.get('user_ip')
     username = current_user.id
+    things_to_do_form = ThingsToDoForm()
     context = {
          'user_ip': user_ip, 
          'things_to_do': get_things_to_do(user_id=username),
-         'username': username
+         'username': username,
+         'things_to_do_form': things_to_do_form
     }
     
     return render_template('hello.html', **context)

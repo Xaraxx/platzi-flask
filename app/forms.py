@@ -10,3 +10,7 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     submit   = SubmitField('Submit')
 
+
+class ThingsToDoForm(FlaskForm):
+    description = StringField('Description', validators=[DataRequired()])
+    submit =  SubmitField('Create')
