@@ -49,3 +49,7 @@ Change the debug mode.
 This authentication is for comunicate our local server with google data base.
 
 `gcloud auth application-default login`
+
+For put in deploy the application
+
+`gcloud app deploy app.yaml`
