@@ -17,15 +17,18 @@
         <a href="{{ url_for('index') }}"> Go to the begin</a>
     {% endif %}
 
-    <div class="container">
+    <div class="container sm-6">
         <h2>Create a new task</h2>
         {{ wtf.quick_form(things_to_do_form) }}
+    
+        <br/>    
     </div>
-
-    <ul>
-        {% for todo in things_to_do %}
-            {{ macros.render_todo(todo) }}
-        {% endfor %}
-    </ul>
+    <div class="container sm-6">
+        <ul class="list-group">
+            {% for task in things_to_do %}
+                {{ macros.render_task(task, delete_form) }}
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}
     

@@ -16,10 +16,27 @@ def get_users():
 def get_user(user_id):
     return db.collection('users').document(user_id).get()
 
-def get_things_to_do(user_id):
-    return db.collection('users').document(user_id).collection('things_to_do').get()
-
 
 def create_new_user(user_data):
     user_ref = db.collection('users').document(user_data.username)
     user_ref.set({'password': user_data.password})
+
+
+def get_things_to_do(user_id):
+    return db.collection('users').document(user_id).collection('things_to_do').get()
+
+
+def create_new_task(user_id, description):
+
+    task_ref = db.collection('users').document(user_id).collection('things_to_do')
+    task_ref.add({
+        'description': description, 
+        'done': False})
+
+
+def delete_task(user_id, task_id):
+    task_ref = db.document('users/{}/things_to_do/{}'.format(user_id, task_id))
+    task_ref.delete()
+    # task_ref = db.collection('users').document(user_id).collection('things_to_do').document(task_id)
+
+

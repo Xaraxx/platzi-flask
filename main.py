@@ -6,8 +6,8 @@ from flask_bootstrap import Bootstrap
 from flask_login import login_required, current_user
 
 from app import create_app
-from app.forms import ThingsToDoForm
-from app.firestore_service import get_users, get_things_to_do
+from app.forms import ThingsToDoForm, DeleteTaskForm
+from app.firestore_service import get_users, get_things_to_do, create_new_task,delete_task
 
 app = create_app()
 
@@ -36,20 +36,33 @@ def index():
     return response
 
 
-@app.route('/hello/', methods=['GET'])
+@app.route('/hello/', methods=['GET', 'POST'])
 @login_required
 def hello():
     user_ip = session.get('user_ip')
     username = current_user.id
     things_to_do_form = ThingsToDoForm()
+    delete_form = DeleteTaskForm()
     context = {
          'user_ip': user_ip, 
          'things_to_do': get_things_to_do(user_id=username),
          'username': username,
-         'things_to_do_form': things_to_do_form
+         'things_to_do_form': things_to_do_form,
+         'delete_form': delete_form
     }
+
+    if things_to_do_form.validate_on_submit():
+        create_new_task(user_id=username, description=things_to_do_form.description.data)
+
+        flash('New task added successfully!')
+        return redirect(url_for('hello'))
     
     return render_template('hello.html', **context)
 
 
+@app.route('/tasks/delete/<task_id>', methods=['POST'])
+def delete(task_id):
+    user_id = current_user.id
+    delete_task(user_id=user_id, task_id=task_id)
+    return redirect(url_for('hello'))
 
